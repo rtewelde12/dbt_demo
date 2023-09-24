@@ -1,0 +1,29 @@
+name: Run dbt Models
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your main branch name
+
+jobs:
+  run-dbt-models:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Specify the Python version you need
+
+    - name: Install dbt
+      run: |
+        pip install dbt-core
+        dbt --version
+
+    - name: Run dbt models
+      run: |
+        cd demohub  # Change to the directory containing your dbt_project.yml
+        dbt run
