@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main  # Adjust to your main branch name
+      
+env:
+  SNOWSQL_USER: rtewelde
+  SNOWSQL_PWD: ${{ secrets.Lateralus85! }}
+  SNOWSQL_DATABASE: demo_dbt
+  SNOWSQL_SCHEMA: employee_data
+  SNOWSQL_WAREHOUSE: compute_wh
+  SNOWSQL_ROLE: accountadmin
+  SNOWSQL_ACCOUNT: ${{ secrets.cixgwzi-mu81305 }}
 
 jobs:
   run-dbt-models:
@@ -22,6 +31,9 @@ jobs:
       run: |
         pip install dbt-core
         dbt --version
+
+    - name: dbt debug
+      run: dbt debug --profiles-dir $PWD
 
     - name: Run dbt models
       run: |
