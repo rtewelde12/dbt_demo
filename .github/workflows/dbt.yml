@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Copy profiles.yml
-      run: cp ./Users/rtewelde/.dbt/profiles.yml /home/runner/work/
+      run: cp ~/.dbt/profiles.yml /home/runner/work/
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -36,9 +36,9 @@ jobs:
         dbt --version
 
     - name: dbt debug
-      run: dbt debug --profiles-dir /Users/rtewelde/.dbt/ 
+      run: dbt debug --profiles-dir ~/.dbt/ 
 
     - name: Run dbt models
       run: |
-        cd /Users/rtewelde/.dbt/  # Change to the directory containing your dbt_project.yml
+        cd ~/.dbt/  # Change to the directory containing your dbt_project.yml
         dbt run
