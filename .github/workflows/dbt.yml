@@ -21,15 +21,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    # Add a step to copy profiles.yml to /home/runner/work/
-    - name: Copy profiles.yml
-      run: cp ./.dbt/profiles.yml /home/runner/work/dbt_demo/
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Specify the Python version you need
+        python-version: '3.11'  # Specify the Python version you need
 
     - name: Install dbt
       run: |
