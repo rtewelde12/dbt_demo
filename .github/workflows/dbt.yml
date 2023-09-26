@@ -37,5 +37,5 @@ jobs:
 
     - name: Run dbt models
       run: |
-        cd demohub  # Change to the directory containing your dbt_project.yml
+        cd /Users/rtewelde/.dbt  # Change to the directory containing your dbt_project.yml
         dbt run
