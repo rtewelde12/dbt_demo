@@ -24,7 +24,7 @@ jobs:
       
     # Add a step to copy profiles.yml to /home/runner/work/
     - name: Copy profiles.yml
-      run: cp /.dbt/profiles.yml /home/runner/work/dbt_demo/
+      run: cp ./.dbt/profiles.yml /home/runner/work/dbt_demo/
 
     - name: Set up Python
       uses: actions/setup-python@v2
