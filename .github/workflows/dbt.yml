@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Copy profiles.yml
-      run: cp ~/.dbt/profiles.yml /home/runner/work/
+      run: cp $HOME/.dbt/profiles.yml /home/runner/work/
 
     - name: Set up Python
       uses: actions/setup-python@v2
