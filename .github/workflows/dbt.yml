@@ -32,29 +32,9 @@ jobs:
         pip install dbt-core
         dbt --version
 
-    - name: Generate or Download profiles.yml
-      run: |
-        # Create a basic profiles.yml content
-        echo "default:" > $HOME/.dbt/profiles.yml
-        echo "  target: dev" >> $HOME/.dbt/profiles.yml
-        echo "  outputs:" >> $HOME/.dbt/profiles.yml
-        echo "    dev:" >> $HOME/.dbt/profiles.yml
-        echo "      type: snowflake" >> $HOME/.dbt/profiles.yml
-        echo "      account: $SF_ACCOUNT" >> $HOME/.dbt/profiles.yml
-        echo "      username: $SF_USERNAME" >> $HOME/.dbt/profiles.yml
-        echo "      password: $SF_PASSWORD" >> $HOME/.dbt/profiles.yml
-        echo "      role: $SF_ROLE" >> $HOME/.dbt/profiles.yml
-        echo "      warehouse: $SF_WAREHOUSE" >> $HOME/.dbt/profiles.yml
-        echo "      database: $SF_DATABASE" >> $HOME/.dbt/profiles.yml
-        echo "      schema: $SF_SCHEMA" >> $HOME/.dbt/profiles.yml
-
-        # Ensure that the file is copied to the destination directory
-        cp $HOME/.dbt/profiles.yml /home/runner/work/
-
     - name: dbt debug
-      run: dbt debug --profiles-dir ~/.dbt/ 
+      run: dbt debug
 
     - name: Run dbt models
       run: |
-        cd ~/.dbt/  # Change to the directory containing your dbt_project.yml
         dbt run
