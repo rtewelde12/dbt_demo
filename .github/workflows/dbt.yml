@@ -35,7 +35,7 @@ jobs:
     - name: Copy profiles.yml and .dbt.yml
       run: |
         cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-        cp dbt_demo/demohub/.dbt.yml $HOME/.dbt/  # Copy .dbt.yml
+        cp dbt_demo/.github/workflows/.dbt.yml $HOME/.dbt/  # Copy .dbt.yml from the workflows directory
 
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
