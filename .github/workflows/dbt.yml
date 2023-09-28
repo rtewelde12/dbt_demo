@@ -55,6 +55,18 @@ jobs:
         # Copy profiles.yml to the .dbt directory
         cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
 
+    - name: Configure Environment Variables
+      if: success()  # Only execute this step if the previous step (Copy profiles.yml) succeeds
+      run: |
+        echo "Configuring environment variables..."
+        export SF_ACCOUNT=$SF_ACCOUNT
+        export SF_USERNAME=$SF_USERNAME
+        export SF_PASSWORD=$SF_PASSWORD
+        export SF_ROLE=$SF_ROLE
+        export SF_WAREHOUSE=$SF_WAREHOUSE
+        export SF_DATABASE=$SF_DATABASE
+        export SF_SCHEMA=$SF_SCHEMA
+
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
 
