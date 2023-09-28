@@ -31,6 +31,12 @@ jobs:
       run: |
         pip install dbt-core
         dbt --version
+        
+    - name: List Files in Directory
+      run: ls dbt_demo/demohub/
+
+    - name: Print Working Directory
+      run: pwd
 
     - name: Copy profiles.yml
       run: cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
