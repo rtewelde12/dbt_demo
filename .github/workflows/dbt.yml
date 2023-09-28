@@ -31,12 +31,16 @@ jobs:
       run: |
         pip install dbt-core
         dbt --version
+        
+    - name: Change Working Directory
+      run: cd /Users/rtewelde/dbt_demo/demohub
+
 
     - name: Change Working Directory
       run: cd dbt_demo/demohub  # Change to the directory containing your dbt_project.yml and profiles.yml
 
     - name: Copy profiles.yml
-      run: cp profiles.yml $HOME/.dbt/
+      run: cp profiles.yml $HOME ~/.dbt/
 
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
