@@ -48,6 +48,7 @@ jobs:
         fi
 
     - name: Copy profiles.yml
+      if: success()  # Only execute this step if the previous step (Check if profiles.yml exists) succeeds
       run: |
         # Create the .dbt directory if it doesn't exist
         mkdir -p $HOME/.dbt
