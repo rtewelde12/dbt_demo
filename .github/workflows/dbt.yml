@@ -37,6 +37,16 @@ jobs:
         # Debugging step to list files in the current directory
         ls -R
 
+    - name: Check if profiles.yml exists
+      run: |
+        if [ -e "dbt_demo/demohub/profiles.yml" ]; then
+          echo "profiles.yml exists in dbt_demo/demohub/ directory."
+        else
+          echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
+          # You can add error handling or take appropriate action here if needed.
+          exit 1  # Exit the workflow with an error code if the file doesn't exist
+        fi
+
     - name: Copy profiles.yml
       run: |
         # Create the .dbt directory if it doesn't exist
