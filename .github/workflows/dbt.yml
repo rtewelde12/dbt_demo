@@ -5,6 +5,15 @@ on:
     branches:
       - main  # Adjust to your main branch name
 
+env:
+  SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+  SF_USERNAME: ${{ secrets.SF_USERNAME }}
+  SF_PASSWORD: ${{ secrets.SF_PW }}
+  SF_ROLE: ${{ secrets.SF_ROLE }}
+  SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+  SF_DATABASE: ${{ secrets.SF_DB }}
+  SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
+
 jobs:
   run-dbt-models:
     runs-on: ubuntu-latest
@@ -24,15 +33,12 @@ jobs:
         dbt --version
 
     - name: Copy profiles.yml
-      run: cp /Users/rtewelde/dbt_demo/demohub/profiles.yml $HOME/.dbt/
-
-    - name: Copy dbt_project.yml
-      run: cp /Users/rtewelde/dbt_demo/demohub/dbt_project.yml $HOME/.dbt/
+      run: cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
 
     - name: dbt debug
-      run: dbt debug --profiles-dir ~/.dbt/
+      run: dbt debug --profiles-dir ~/.dbt/ 
 
     - name: Run dbt models
       run: |
-        cd /Users/rtewelde/dbt_demo/demohub  # Change to the directory containing your dbt_project.yml
+        cd ~/.dbt/  # Change to the directory containing your dbt_project.yml
         dbt run
