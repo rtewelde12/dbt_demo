@@ -37,28 +37,25 @@ jobs:
         # Debugging step to list files in the current directory
         ls -R
 
+    - name: Ensure .dbt directory exists
+      run: mkdir -p $HOME/.dbt
+
     - name: Check if profiles.yml exists
       run: |
         if [ -e "dbt_demo/demohub/profiles.yml" ]; then
           echo "profiles.yml exists in dbt_demo/demohub/ directory."
+          cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
         else
           echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
           # You can add error handling or take appropriate action here if needed.
           exit 1  # Exit the workflow with an error code if the file doesn't exist
         fi
 
-    - name: Copy profiles.yml
-      if: success()  # Only execute this step if the previous step (Check if profiles.yml exists) succeeds
-      run: |
-        # Create the .dbt directory if it doesn't exist
-        mkdir -p $HOME/.dbt
-        # Copy profiles.yml to the .dbt directory
-        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-
     - name: Configure Environment Variables
-      if: success()  # Only execute this step if the previous step (Copy profiles.yml) succeeds
       run: |
         echo "Configuring environment variables..."
+        export PATH=$PATH:/opt/hostedtoolcache/Python/3.11.5/x64/bin
+        export LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.11.5/x64/lib
         export SF_ACCOUNT=$SF_ACCOUNT
         export SF_USERNAME=$SF_USERNAME
         export SF_PASSWORD=$SF_PASSWORD
@@ -66,12 +63,6 @@ jobs:
         export SF_WAREHOUSE=$SF_WAREHOUSE
         export SF_DATABASE=$SF_DATABASE
         export SF_SCHEMA=$SF_SCHEMA
-
-    - name: Set up Python environment
-      if: success()  # Only execute this step if the previous step (Configure Environment Variables) succeeds
-      run: |
-        export PATH=$PATH:/opt/hostedtoolcache/Python/3.11.5/x64/bin
-        export LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.11.5/x64/lib
 
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
