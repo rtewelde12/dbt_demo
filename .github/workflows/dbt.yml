@@ -67,6 +67,12 @@ jobs:
         export SF_DATABASE=$SF_DATABASE
         export SF_SCHEMA=$SF_SCHEMA
 
+    - name: Set up Python environment
+      if: success()  # Only execute this step if the previous step (Configure Environment Variables) succeeds
+      run: |
+        export PATH=$PATH:/opt/hostedtoolcache/Python/3.11.5/x64/bin
+        export LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.11.5/x64/lib
+
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
 
