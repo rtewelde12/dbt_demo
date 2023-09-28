@@ -32,16 +32,17 @@ jobs:
         pip install dbt-core
         dbt --version
 
-    - name: Copy configuration files
+    - name: List Files
       run: |
-        # Ensure that the required directories exist
-        mkdir -p $HOME/.dbt
-        mkdir -p dbt_demo/demohub
-        mkdir -p dbt_demo/.github/workflows
+        # Debugging step to list files in the current directory
+        ls -R
 
-        # Copy profiles.yml, dbt_project.yml, and .dbt.yml
+    - name: Copy profiles.yml
+      run: |
+        # Create the .dbt directory if it doesn't exist
+        mkdir -p $HOME/.dbt
+        # Copy profiles.yml to the .dbt directory
         cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-        cp dbt_demo/demohub/dbt_project.yml dbt_demo/demohub/.dbt.yml $HOME/.dbt/
 
     - name: dbt debug
       run: dbt debug --profiles-dir ~/.dbt/ 
@@ -50,10 +51,3 @@ jobs:
       run: |
         cd dbt_demo/demohub  # Change to the directory containing your dbt_project.yml
         dbt run
-
-    - name: Cleanup
-      run: |
-        # Optionally, you can clean up files or directories if needed
-        rm -rf $HOME/.dbt
-
-# Add more steps as needed for your workflow
