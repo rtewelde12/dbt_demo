@@ -5,15 +5,6 @@ on:
     branches:
       - main  # Adjust to your main branch name
 
-env:
-  SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-  SF_USERNAME: ${{ secrets.SF_USERNAME }}
-  SF_PASSWORD: ${{ secrets.SF_PW }}
-  SF_ROLE: ${{ secrets.SF_ROLE }}
-  SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-  SF_DATABASE: ${{ secrets.SF_DB }}
-  SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
-
 jobs:
   run-dbt-models:
     runs-on: ubuntu-latest
@@ -32,32 +23,16 @@ jobs:
         pip install dbt-core
         dbt --version
 
-    - name: Create .dbt directory
-      run: mkdir -p $HOME/.dbt
-
-    - name: Generate profiles.yml
-      run: |
-        # Create a basic profiles.yml content
-        echo "default:" > $HOME/.dbt/profiles.yml
-        echo "  target: dev" >> $HOME/.dbt/profiles.yml
-        echo "  outputs:" >> $HOME/.dbt/profiles.yml
-        echo "    dev:" >> $HOME/.dbt/profiles.yml
-        echo "      type: snowflake" >> $HOME/.dbt/profiles.yml
-        echo "      account: $SF_ACCOUNT" >> $HOME/.dbt/profiles.yml
-        echo "      username: $SF_USERNAME" >> $HOME/.dbt/profiles.yml
-        echo "      password: $SF_PASSWORD" >> $HOME/.dbt/profiles.yml
-        echo "      role: $SF_ROLE" >> $HOME/.dbt/profiles.yml
-        echo "      warehouse: $SF_WAREHOUSE" >> $HOME/.dbt/profiles.yml
-        echo "      database: $SF_DATABASE" >> $HOME/.dbt/profiles.yml
-        echo "      schema: $SF_SCHEMA" >> $HOME/.dbt/profiles.yml
-
     - name: Copy profiles.yml
-      run: cp $HOME/.dbt/profiles.yml /home/runner/work/
+      run: cp /Users/rtewelde/dbt_demo/demohub/profiles.yml $HOME/.dbt/
+
+    - name: Copy dbt_project.yml
+      run: cp /Users/rtewelde/dbt_demo/demohub/dbt_project.yml $HOME/.dbt/
 
     - name: dbt debug
-      run: dbt debug --profiles-dir ~/.dbt/ 
+      run: dbt debug --profiles-dir ~/.dbt/
 
     - name: Run dbt models
       run: |
-        cd ~/.dbt/  # Change to the directory containing your dbt_project.yml
+        cd /Users/rtewelde/dbt_demo/demohub  # Change to the directory containing your dbt_project.yml
         dbt run
