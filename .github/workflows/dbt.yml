@@ -39,7 +39,7 @@ jobs:
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
     - name: List files in dbt_demo/demohub
-      run: ls -R dbt_demo/demohub
+      run: ls -R /Users/rtewelde/dbt_demo/demohub
 
     - name: Check if profiles.yml exists
       run: |
