@@ -36,6 +36,7 @@ jobs:
       run: |
         mkdir -p $HOME/.dbt
         mkdir -p dbt_demo/.github/workflows
+        chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
     - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
       run: |
