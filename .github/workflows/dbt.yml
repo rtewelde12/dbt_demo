@@ -38,13 +38,16 @@ jobs:
         mkdir -p dbt_demo/.github/workflows
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
-    - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
+    - name: Check if profiles.yml exists
       run: |
-        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-        cp dbt_demo/demohub/dbt_project.yml dbt_demo/demohub/.dbt.yml $HOME/.dbt/
-
-    - name: dbt debug
-      run: dbt debug --profiles-dir $HOME/.dbt/
+        if [ -e "dbt_demo/demohub/profiles.yml" ]; then
+          echo "profiles.yml exists in dbt_demo/demohub/ directory."
+          cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        else
+          echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
+          # You can add error handling or take appropriate action here if needed.
+          exit 1  # Exit the workflow with an error code if the file doesn't exist
+        fi
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
