@@ -31,9 +31,9 @@ jobs:
       run: |
         pip install dbt-core
         dbt --version
-
+    
     - name: Print directory contents
-      run: ls -R /Users/rtewelde/dbt_demo/demohub
+      run: ls -R /Users/rtewelde/dbt_demo
 
     - name: Ensure .dbt directory exists
       run: mkdir -p $HOME/.dbt
