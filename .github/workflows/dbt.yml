@@ -33,7 +33,7 @@ jobs:
         dbt --version
 
     - name: Print directory contents
-      run: ls -R dbt_demo/demohub
+      run: ls -R /Users/rtewelde/dbt_demo/demohub
 
     - name: Ensure .dbt directory exists
       run: mkdir -p $HOME/.dbt
