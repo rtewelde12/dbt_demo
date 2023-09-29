@@ -31,31 +31,27 @@ jobs:
       run: |
         pip install dbt-core
         dbt --version
-    
-    - name: Print directory contents
-      run: ls -R ./dbt_demo
-
-    - name: Ensure .dbt directory exists
-      run: mkdir -p $HOME/.dbt
-
-    - name: Copy profiles.yml
-      run: cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-
-    - name: Configure Environment Variables
+        
+    - name: Ensure required directories exist
       run: |
-        echo "Configuring environment variables..."
-        export PATH=$PATH:/opt/hostedtoolcache/Python/3.11.5/x64/bin
-        export LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.11.5/x64/lib
-        export SF_ACCOUNT=$SF_ACCOUNT
-        export SF_USERNAME=$SF_USERNAME
-        export SF_PASSWORD=$SF_PASSWORD
-        export SF_ROLE=$SF_ROLE
-        export SF_WAREHOUSE=$SF_WAREHOUSE
-        export SF_DATABASE=$SF_DATABASE
-        export SF_SCHEMA=$SF_SCHEMA
+        mkdir -p $HOME/.dbt
+        mkdir -p dbt_demo/.github/workflows
+
+    - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
+      run: |
+        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        cp dbt_demo/demohub/dbt_project.yml dbt_demo/demohub/.dbt.yml $HOME/.dbt/
 
     - name: dbt debug
-      run: dbt debug --profiles-dir ~/.dbt/ 
+      run: dbt debug --profiles-dir $HOME/.dbt/
+
+    - name: dbt debug
+      run: dbt debug --profiles-dir $HOME/.dbt/
+
+    - name: Run dbt tests
+      run: |
+        cd dbt_demo/demohub  # Change to the directory containing your dbt_project.yml
+        dbt test
 
     - name: Run dbt models
       run: |
