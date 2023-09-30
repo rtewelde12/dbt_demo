@@ -58,14 +58,12 @@ jobs:
 
     - name: Check if profiles.yml exists
       run: |
-        cd dbt_demo/demohub
-        if [ -e "profiles.yml" ]; then
+        if [ -e "dbt_demo/demohub/profiles.yml" ]; then
           echo "profiles.yml exists in dbt_demo/demohub/ directory."
-          cp profiles.yml $HOME/.dbt/
+          cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
         else
           echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
-          ls -R  # Print directory contents for debugging
-          ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
+          ls -R dbt_demo/demohub  # Print directory contents for debugging
           # You can add error handling or take appropriate action here if needed.
           exit 1  # Exit the workflow with an error code if the file doesn't exist
         fi
