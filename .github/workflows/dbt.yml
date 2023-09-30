@@ -35,7 +35,7 @@ jobs:
     - name: Ensure required directories exist
       run: |
         mkdir -p $HOME/.dbt
-        mkdir -p "/Users/rtewelde/dbt_demo/demohub"
+        mkdir -p dbt_demo/demohub
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
     - name: Print current working directory
@@ -54,16 +54,16 @@ jobs:
 
     - name: Print contents of dbt_demo/demohub
       run: |
-        ls -R /Users/rtewelde/dbt_demo/demohub/
+        ls -R dbt_demo/demohub
 
     - name: Check if profiles.yml exists
       run: |
         cd dbt_demo/demohub
         if [ -e "profiles.yml" ]; then
-          echo "profiles.yml exists in /Users/rtewelde/dbt_demo/demohub/ directory."
+          echo "profiles.yml exists in dbt_demo/demohub/ directory."
           cp profiles.yml $HOME/.dbt/
         else
-          echo "profiles.yml does not exist in /Users/rtewelde/dbt_demo/demohub/ directory."
+          echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
           ls -R  # Print directory contents for debugging
           ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
           # You can add error handling or take appropriate action here if needed.
