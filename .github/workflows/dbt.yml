@@ -35,7 +35,7 @@ jobs:
     - name: Ensure required directories exist
       run: |
         mkdir -p $HOME/.dbt
-        mkdir -p /Users/rtewelde/dbt_demo/demohub
+        mkdir -p "/Users/rtewelde/dbt_demo/demohub"
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
     - name: Print current working directory
