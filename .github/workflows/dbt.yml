@@ -46,7 +46,7 @@ jobs:
     - name: Print current working directory
       run: |
         pwd
-        ls -R
+        ls -R dbt_demo/demohub
 
     - name: Check if profiles.yml exists
       run: |
