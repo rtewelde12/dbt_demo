@@ -33,34 +33,16 @@ jobs:
         pip install dbt-snowflake
         dbt --version
 
-    - name: Ensure required directories exist
+    - name: Set up dbt
       run: |
         mkdir -p $HOME/.dbt
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
-
-    - name: Print current working directory
-      run: pwd
-
-    - name: List files in the root directory
-      run: ls -R
-
-    - name: Copy profiles.yml and dbt_project.yml to $HOME/.dbt/
-      run: |
-        if [ -e "demohub/profiles.yml" ] && [ -e "demohub/dbt_project.yml" ]; then
-          cp demohub/profiles.yml $HOME/.dbt/
-          cp demohub/dbt_project.yml $HOME/.dbt/
-        else
-          echo "Error: profiles.yml or dbt_project.yml not found in the demohub directory."
-          ls -R demohub
-          ls -R $HOME/.dbt/
-          exit 1
-        fi
+        cp demohub/profiles.yml $HOME/.dbt/
+        cp demohub/dbt_project.yml $HOME/.dbt/
+        dbt debug --profiles-dir $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
-
-    - name: dbt debug
-      run: dbt debug --profiles-dir $HOME/.dbt/
 
     - name: Run dbt tests and models
       run: |
