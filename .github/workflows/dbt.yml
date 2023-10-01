@@ -43,14 +43,10 @@ jobs:
         pwd
         ls -R
 
-    - name: Change to dbt_demo/demohub directory
-      run: cd dbt_demo/demohub
-
-    - name: Debug - Check files in dbt_demo/demohub
+    - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
       run: |
-        pwd
-        ls -a
-        cat profiles.yml || echo "profiles.yml not found"
+        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        cp dbt_demo/demohub/dbt_project.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: |
