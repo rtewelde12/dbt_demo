@@ -35,12 +35,11 @@ jobs:
     - name: Ensure required directories exist
       run: |
         mkdir -p $HOME/.dbt
-        mkdir -p dbt_demo/demohub
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
     - name: Copy profiles.yml to $HOME/.dbt/
       run: |
-        cp /Users/rtewelde/dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: |
