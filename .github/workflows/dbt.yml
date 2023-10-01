@@ -50,6 +50,7 @@ jobs:
     - name: Debug - Check files in dbt_demo/demohub
       run: |
         cd dbt_demo/demohub
+        pwd
         ls -a
 
     - name: Check if profiles.yml exists
