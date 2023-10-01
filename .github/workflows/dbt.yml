@@ -41,13 +41,19 @@ jobs:
     - name: Print current working directory
       run: pwd
 
-    - name: List files in dbt_demo/demohub
-      run: ls -R dbt_demo/demohub
+    - name: List files in the root directory
+      run: ls -R
 
-    - name: Copy profiles.yml and dbt_project.yml to $HOME/.dbt/
+    - name: Copy profiles.yml to $HOME/.dbt/
       run: |
-        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-        cp dbt_demo/demohub/dbt_project.yml $HOME/.dbt/
+        if [ -e "demohub/profiles.yml" ]; then
+          cp demohub/profiles.yml $HOME/.dbt/
+        else
+          echo "Error: profiles.yml not found in the demohub directory."
+          ls -R demohub
+          ls -R $HOME/.dbt/
+          exit 1
+        fi
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
