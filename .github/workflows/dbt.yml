@@ -39,10 +39,12 @@ jobs:
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
         cp demohub/profiles.yml $HOME/.dbt/
         cp demohub/dbt_project.yml $HOME/.dbt/
-        dbt debug --profiles-dir $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
+
+    - name: dbt debug
+      run: dbt debug --profiles-dir $HOME/.dbt/
 
     - name: Run dbt tests and models
       run: |
