@@ -52,6 +52,7 @@ jobs:
           cp profiles.yml $HOME/.dbt/
         else
           echo "Error: profiles.yml not found in dbt_demo/demohub/ directory."
+          ls -R  # Print directory contents for debugging
           ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
           exit 1  # Exit the workflow with an error code if the file doesn't exist
         fi
@@ -63,6 +64,11 @@ jobs:
     - name: Print contents of dbt_demo/demohub
       run: |
         ls -R dbt_demo/demohub
+
+    - name: Debug - Check files in dbt_demo/demohub
+      run: |
+        cd dbt_demo/demohub
+        ls -a
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
