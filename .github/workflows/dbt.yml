@@ -44,12 +44,13 @@ jobs:
     - name: List files in the root directory
       run: ls -R
 
-    - name: Copy profiles.yml to $HOME/.dbt/
+    - name: Copy profiles.yml and dbt_project.yml to $HOME/.dbt/
       run: |
-        if [ -e "demohub/profiles.yml" ]; then
+        if [ -e "demohub/profiles.yml" ] && [ -e "demohub/dbt_project.yml" ]; then
           cp demohub/profiles.yml $HOME/.dbt/
+          cp demohub/dbt_project.yml $HOME/.dbt/
         else
-          echo "Error: profiles.yml not found in the demohub directory."
+          echo "Error: profiles.yml or dbt_project.yml not found in the demohub directory."
           ls -R demohub
           ls -R $HOME/.dbt/
           exit 1
