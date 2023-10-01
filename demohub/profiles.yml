@@ -1,16 +1,13 @@
 demohub:
-  snowflake:
-    target: dev
-    outputs:
-      dev:
+  outputs:
+    dev:
       account: cixgwzi-mu81305
       database: demo_dbt
       password: Lateralus85!
       role: accountadmin
       schema: employee_data
+      threads: 1
       type: snowflake
       user: rtewelde
       warehouse: compute_wh
-      threads: 4
-      client_session_keep_alive: false
-      query_tag: dbt
+  target: dev
