@@ -40,7 +40,7 @@ jobs:
 
     - name: Copy profiles.yml to $HOME/.dbt/
       run: |
-        cp /path/to/your/dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        cp /Users/rtewelde/dbt_demo/demohub/profiles.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: |
