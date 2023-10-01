@@ -37,17 +37,17 @@ jobs:
         mkdir -p $HOME/.dbt
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
+    - name: Print current working directory
+      run: pwd
+
+    - name: List files in dbt_demo/demohub
+      run: ls -R dbt_demo/demohub
+
     - name: Copy profiles.yml to $HOME/.dbt/
-      run: |
-        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+      run: cp dbt_demo/demohub/profiles.yml $HOME/.dbt/ || echo "Error: Unable to copy profiles.yml"
 
     - name: Print contents of $HOME/.dbt/
-      run: |
-        ls -R $HOME/.dbt/
-
-    - name: Print contents of dbt_demo/demohub
-      run: |
-        ls -R dbt_demo/demohub
+      run: ls -R $HOME/.dbt/
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
