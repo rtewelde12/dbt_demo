@@ -45,11 +45,11 @@ jobs:
 
     - name: Copy profiles.yml to $HOME/.dbt/
       run: |
-        if [ -e "profiles.yml" ]; then
-          cp profiles.yml $HOME/.dbt/
+        if [ -e "demohub/profiles.yml" ]; then
+          cp demohub/profiles.yml $HOME/.dbt/
         else
-          echo "Error: profiles.yml not found in the root directory."
-          ls -R
+          echo "Error: profiles.yml not found in the demohub directory."
+          ls -R demohub
           ls -R $HOME/.dbt/
           exit 1
         fi
