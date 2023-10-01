@@ -44,7 +44,15 @@ jobs:
       run: ls -R dbt_demo/demohub
 
     - name: Copy profiles.yml to $HOME/.dbt/
-      run: cp dbt_demo/demohub/profiles.yml $HOME/.dbt/ || echo "Error: Unable to copy profiles.yml"
+      run: |
+        if [ -e "dbt_demo/demohub/profiles.yml" ]; then
+          cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        else
+          echo "Error: profiles.yml not found in dbt_demo/demohub/ directory."
+          ls -R dbt_demo/demohub
+          ls -R $HOME/.dbt/
+          exit 1
+        fi
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
