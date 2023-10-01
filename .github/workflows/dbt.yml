@@ -43,23 +43,16 @@ jobs:
         pwd
         ls -R dbt_demo/demohub
 
-    - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
+    - name: Check if profiles.yml exists
       run: |
-        if [ -e "dbt_demo/demohub/profiles.yml" ]; then
-          echo "Copying profiles.yml to $HOME/.dbt/"
-          cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
+        cd dbt_demo/demohub
+        ls -R  # Print directory contents for debugging
+        if [ -e "profiles.yml" ]; then
+          echo "profiles.yml exists in dbt_demo/demohub/ directory."
+          cp profiles.yml $HOME/.dbt/
         else
           echo "Error: profiles.yml not found in dbt_demo/demohub/ directory."
-          ls -R dbt_demo/demohub  # Print directory contents for debugging
-          exit 1  # Exit the workflow with an error code if the file doesn't exist
-        fi
-
-        if [ -e "dbt_demo/demohub/dbt_project.yml" ]; then
-          echo "Copying dbt_project.yml to $HOME/.dbt/"
-          cp dbt_demo/demohub/dbt_project.yml dbt_demo/demohub/.dbt.yml $HOME/.dbt/
-        else
-          echo "Error: dbt_project.yml not found in dbt_demo/demohub/ directory."
-          ls -R dbt_demo/demohub  # Print directory contents for debugging
+          ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
           exit 1  # Exit the workflow with an error code if the file doesn't exist
         fi
 
@@ -70,19 +63,6 @@ jobs:
     - name: Print contents of dbt_demo/demohub
       run: |
         ls -R dbt_demo/demohub
-
-    - name: Check if profiles.yml exists
-      run: |
-        cd dbt_demo/demohub
-        ls -R  # Print directory contents for debugging
-        if [ -e "profiles.yml" ]; then
-          echo "profiles.yml exists in dbt_demo/demohub/ directory."
-          cp profiles.yml $HOME/.dbt/
-        else
-          echo "profiles.yml does not exist in dbt_demo/demohub/ directory."
-          ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
-          exit 1  # Exit the workflow with an error code if the file doesn't exist
-        fi
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
