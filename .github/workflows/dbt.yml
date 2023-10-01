@@ -42,6 +42,11 @@ jobs:
       run: |
         pwd
         ls -R dbt_demo/demohub
+        
+    - name: Debug - Check files in dbt_demo/demohub
+      run: |
+        cd dbt_demo/demohub
+        ls -a
 
     - name: Check if profiles.yml exists
       run: |
@@ -64,11 +69,6 @@ jobs:
     - name: Print contents of dbt_demo/demohub
       run: |
         ls -R dbt_demo/demohub
-
-    - name: Debug - Check files in dbt_demo/demohub
-      run: |
-        cd dbt_demo/demohub
-        ls -a
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
