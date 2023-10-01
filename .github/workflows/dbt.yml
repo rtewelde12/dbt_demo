@@ -38,39 +38,17 @@ jobs:
         mkdir -p dbt_demo/demohub
         chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
 
-    - name: Print current working directory
+    - name: Copy profiles.yml to $HOME/.dbt/
       run: |
-        pwd
-        ls -R dbt_demo/demohub
-        
-    - name: Print contents of dbt_demo/demohub
-      run: |
-        ls -R dbt_demo/demohub
-
-    - name: Debug - Check files in dbt_demo/demohub
-      run: |
-        cd dbt_demo/demohub
-        pwd
-        ls -a
-        cat profiles.yml
-
-    - name: Check if profiles.yml exists
-      run: |
-        cd dbt_demo/demohub
-        ls -R  # Print directory contents for debugging
-        if [ -e "profiles.yml" ]; then
-          echo "profiles.yml exists in dbt_demo/demohub/ directory."
-          cp profiles.yml $HOME/.dbt/
-        else
-          echo "Error: profiles.yml not found in dbt_demo/demohub/ directory."
-          ls -R  # Print directory contents for debugging
-          ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
-          exit 1  # Exit the workflow with an error code if the file doesn't exist
-        fi
+        cp /path/to/your/dbt_demo/demohub/profiles.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: |
         ls -R $HOME/.dbt/
+
+    - name: Print contents of dbt_demo/demohub
+      run: |
+        ls -R dbt_demo/demohub
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
