@@ -41,20 +41,34 @@ jobs:
     - name: Print current working directory
       run: |
         pwd
-        ls -R
-
-    - name: Copy profiles.yml, dbt_project.yml, and .dbt.yml
+        ls -R dbt_demo/demohub
+        
+    - name: Print contents of dbt_demo/demohub
       run: |
-        cp dbt_demo/demohub/profiles.yml $HOME/.dbt/
-        cp dbt_demo/demohub/dbt_project.yml $HOME/.dbt/
+        ls -R dbt_demo/demohub
+
+    - name: Debug - Check files in dbt_demo/demohub
+      run: |
+        cd dbt_demo/demohub
+        ls -a
+
+    - name: Check if profiles.yml exists
+      run: |
+        cd dbt_demo/demohub
+        ls -R  # Print directory contents for debugging
+        if [ -e "profiles.yml" ]; then
+          echo "profiles.yml exists in dbt_demo/demohub/ directory."
+          cp profiles.yml $HOME/.dbt/
+        else
+          echo "Error: profiles.yml not found in dbt_demo/demohub/ directory."
+          ls -R  # Print directory contents for debugging
+          ls -R $HOME/.dbt/  # Print contents of $HOME/.dbt/ for debugging
+          exit 1  # Exit the workflow with an error code if the file doesn't exist
+        fi
 
     - name: Print contents of $HOME/.dbt/
       run: |
         ls -R $HOME/.dbt/
-
-    - name: Print contents of dbt_demo/demohub
-      run: |
-        ls -R dbt_demo/demohub
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/
