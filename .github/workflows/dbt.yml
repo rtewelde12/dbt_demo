@@ -52,6 +52,7 @@ jobs:
         cd dbt_demo/demohub
         pwd
         ls -a
+        cat profiles.yml
 
     - name: Check if profiles.yml exists
       run: |
