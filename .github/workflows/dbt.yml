@@ -44,7 +44,7 @@ jobs:
       run: ls -R $HOME/.dbt/
 
     - name: dbt debug
-      run: dbt debug --profiles-dir $HOME/.dbt/ --config-dir $HOME/.dbt/
+      run: dbt debug --profiles-dir $HOME/.dbt/
 
     - name: Run dbt tests and models
       run: |
