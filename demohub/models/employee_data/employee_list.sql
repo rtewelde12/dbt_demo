@@ -1,7 +1,6 @@
 {{
   config(
-    materialized = "table",
-    materialized = "view"
+    materialized = "table"
   )
 }}
 
@@ -19,7 +18,8 @@ with final as(
         Annual_Salary,
         Bonus_percentages,
         Country,
-        City
+        City,
+        Exit_Date
     
     from {{ ref('employee_seed') }}
 )
