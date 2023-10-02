@@ -36,9 +36,9 @@ jobs:
     - name: Set up dbt
       run: |
         mkdir -p $HOME/.dbt
-        cp -p demohub/profiles.yml $HOME/.dbt/
-        cp -p demohub/dbt_project.yml $HOME/.dbt/
-        cd $HOME/dbt_demo/demohub  # Change to the correct directory
+        chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
+        cp demohub/profiles.yml $HOME/.dbt/
+        cp demohub/dbt_project.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
