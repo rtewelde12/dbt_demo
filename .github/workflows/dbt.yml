@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - '*'  # Trigger for any branch
-      - main
 
 env:
   SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
@@ -51,4 +50,3 @@ jobs:
       run: |
         dbt test --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
         DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
-
