@@ -42,6 +42,12 @@ jobs:
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
+      
+    - name: Print current working directory
+      run: pwd
+
+    - name: Print contents of models directory
+      run: ls -R models/
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
@@ -49,4 +55,5 @@ jobs:
     - name: Run dbt tests and models
       run: |
         dbt test --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
-        DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
+        DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models +model_name
+    
