@@ -21,8 +21,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        path: dbt_demo  # Use a relative path within the GitHub Actions workspace
 
     - name: Set up Python
       uses: actions/setup-python@v2
