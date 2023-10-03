@@ -21,6 +21,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        path: /Users/rtewelde/dbt_demo/demohub/models/employee_data
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -45,9 +47,9 @@ jobs:
       
     - name: Print current working directory
       run: pwd
-
+    
     - name: Print contents of models directory
-      run: ls -R models/
+      run: ls -R /Users/rtewelde/dbt_demo/demohub/models/employee_data
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
@@ -55,5 +57,6 @@ jobs:
     - name: Run dbt tests and models
       run: |
         dbt test --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
-        DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models +model_name
+        DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models +/Users/rtewelde/dbt_demo/demohub/models/employee_data
     
+        
