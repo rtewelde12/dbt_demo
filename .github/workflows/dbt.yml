@@ -47,7 +47,7 @@ jobs:
       run: pwd
 
     - name: Print contents of models directory
-      run: ls -R models/
+      run: ls -R $GITHUB_WORKSPACE/models/
 
     - name: dbt debug
       run: dbt debug --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
