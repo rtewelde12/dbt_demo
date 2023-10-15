@@ -29,7 +29,6 @@ jobs:
 
     - name: Install dbt and Snowflake adapter
       run: |
-        pip install dbt-core
         pip install dbt-snowflake
         dbt --version
 
