@@ -34,4 +34,6 @@ models:
   demohub:
     # Config indicated by + and applies to all files under models/example/
     employee_data:
-      +materialized: view
+      +materialized: table
+    employee_list:  # Add this section for the employee_list.sql model
+      +materialized: table
