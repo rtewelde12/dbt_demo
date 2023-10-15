@@ -35,3 +35,4 @@ models:
       +materialized: table
     employee_list:  # Add this section for the employee_list.sql model
       +materialized: table
+      +tags: ['my_tag']
