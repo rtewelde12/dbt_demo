@@ -25,7 +25,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11'  # Specify the Python version you need
+        python-version: '3.11'
 
     - name: Install dbt and Snowflake adapter
       run: |
@@ -36,15 +36,12 @@ jobs:
     - name: Set up dbt
       run: |
         mkdir -p $HOME/.dbt
-        chmod -R 777 $HOME/.dbt  # Ensure read, write, and execute permissions
+        chmod -R 777 $HOME/.dbt
         cp demohub/profiles.yml $HOME/.dbt/
         cp demohub/dbt_project.yml $HOME/.dbt/
 
     - name: Print contents of $HOME/.dbt/
       run: ls -R $HOME/.dbt/
-
-    - name: dbt debug
-      run: dbt debug --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/
 
     - name: Run dbt tests and models
       run: |
