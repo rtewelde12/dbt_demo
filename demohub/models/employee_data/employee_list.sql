@@ -1,7 +1,8 @@
-{{
+{{ 
   config(
-    materialized = "table"
-  )
+    materialized = 'table',
+    tags = ['my_tag']
+  ) 
 }}
 
 with final as(
