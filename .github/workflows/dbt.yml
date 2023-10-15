@@ -3,7 +3,7 @@ name: Run dbt Models
 on:
   push:
     branches:
-      - '*'  # Trigger for any branch
+      - "*" # Trigger for any branch
 
 env:
   SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
@@ -19,31 +19,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
 
-    - name: Install dbt and Snowflake adapter
-      run: |
-        pip install dbt-snowflake
-        dbt --version
+      - name: Install dbt and Snowflake adapter
+        run: |
+          pip install dbt-snowflake
+          dbt --version
 
-    - name: Set up dbt
-      run: |
-        mkdir -p $HOME/.dbt
-        chmod -R 777 $HOME/.dbt
-        cp demohub/profiles.yml $HOME/.dbt/
-        cp demohub/dbt_project.yml $HOME/.dbt/
+      - name: Set up dbt
+        run: |
+          mkdir -p $HOME/.dbt
+          chmod -R 777 $HOME/.dbt
+          cp demohub/profiles.yml $HOME/.dbt/
+          cp demohub/dbt_project.yml $HOME/.dbt/
 
-    - name: Print contents of $HOME/.dbt/
-      run: ls -R $HOME/.dbt/
+      - name: Print contents of $HOME/.dbt/
+        run: ls -R $HOME/.dbt/
 
-    - name: Run dbt tests and models
-      run: |
-        dbt test --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models tag:my_tag
-        DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models tag:my_tag
-
+      - name: Run dbt tests and models
+        run: |
+          dbt test --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models demohub.employee_list
+          DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models demohub.employee_list
