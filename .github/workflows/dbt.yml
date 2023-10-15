@@ -44,4 +44,4 @@ jobs:
 
       - name: Run dbt tests and models
         run: |
-          DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir $HOME/.dbt/ --models demohub.employee_data.employee_list
+          DBT_DEBUG=true dbt run --profiles-dir $HOME/.dbt/ --project-dir /Users/rtewelde/dbt_demo/ --models demohub.employee_data.employee_list
