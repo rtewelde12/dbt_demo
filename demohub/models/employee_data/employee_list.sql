@@ -19,8 +19,7 @@ with final as(
         Annual_Salary,
         Bonus_percentages,
         Country,
-        City,
-        Exit_Date
+        City
     
     from {{ ref('employee_seed') }}
 )
