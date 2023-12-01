@@ -1,7 +1,7 @@
 demohub:
   outputs:
     dev:
-      account: cixgwzi-mu81305
+      account: nqkmuka-cd11228
       database: demo_dbt
       password: Lateralus85!
       role: accountadmin
