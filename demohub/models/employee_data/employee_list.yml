@@ -17,4 +17,5 @@ models:
       - name: Bonus_percentages
       - name: Country
       - name: City
+      - name: Exit_Date
       
