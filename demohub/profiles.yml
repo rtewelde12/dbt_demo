@@ -1,9 +1,9 @@
 demohub:
   outputs:
     dev:
-      account: nqkmuka-cd11228
+      account: liifdms_cx19744
       database: demo_dbt
-      password: Lateralus85!
+      password: Lateralus0!
       role: accountadmin
       schema: employee_data
       threads: 4
