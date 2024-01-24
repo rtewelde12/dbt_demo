@@ -2,7 +2,7 @@ demohub:
   outputs:
     dev:
       account: liifdms_cx19744
-      database: demo_dbt
+      database: dbt_demo
       password: Lateralus0!
       role: accountadmin
       schema: employee_data
